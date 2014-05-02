@@ -119,7 +119,7 @@
         "Final Fantasy VIII" (set-album-sort tag "Final Fantasy 08")
         "Final Fantasy IX" (set-album-sort tag "Final Fantasy 09")
         "Final Fantasy X" (set-album-sort tag "Final Fantasy 10")
-        "Final Fantasy XI" (set-album-sort tag "Final Fantasy 11")
+        "Final Fantasy XI Online" (set-album-sort tag "Final Fantasy 11")
         "Final Fantasy XII" (set-album-sort tag "Final Fantasy 12")
         "Final Fantasy XIII" (set-album-sort tag "Final Fantasy 13")
         "Final Fantasy XIV" (set-album-sort tag "Final Fantasy 14")
