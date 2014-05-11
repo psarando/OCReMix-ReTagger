@@ -131,7 +131,7 @@
     (when translate
       (set-txt-field
        tag ID3v23FieldKey/COMPOSER
-       (clojure.string/replace composer #"Nobuo Uematsu" "植松伸夫")))
+       (clojure.string/replace composer #"Nobuo Uematsu" "Nobuo Uematsu (植松伸夫)")))
     translate))
 
 (defn update-tags

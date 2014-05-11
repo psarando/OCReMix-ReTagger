@@ -3,7 +3,7 @@ OC ReMix ReTagger
 
 Retags default OC ReMix mp3 files, swapping the Title and Subtitle tags, and the Album and Grouping tags.
 
-Also adds a Sort Album tag (TSOA) for Final Fantasy II - XIV Albums, and translates 'Nobuo Uematsu' in the Composer tag to Japanese (it's one of the few I can read).
+Also adds a Sort Album tag (TSOA) for Final Fantasy II - XIV Albums, and updates 'Nobuo Uematsu' in the Composer tag adding a Japanese translation (it's one of the few I can read).
 
 ### OCR's default ID3v2.3 tag format
 
