@@ -80,24 +80,22 @@
   (let [title (.getFirst tag ID3v23FieldKey/TITLE)
         subtitle-field (.getFirstField tag "TIT3")
         subtitle-body (.getBody subtitle-field)
-        subtitle (.getContent subtitle-field)]
-    (if (> (.length title) (.length subtitle))
-      (do
-        (set-txt-field tag ID3v23FieldKey/TITLE subtitle)
-        (.setBody subtitle-field (FrameBodyTIT3. (.getTextEncoding subtitle-body) title))
-        true)
-      false)))
+        subtitle (.getContent subtitle-field)
+        swap-title (> (.length title) (.length subtitle))]
+    (when swap-title
+      (set-txt-field tag ID3v23FieldKey/TITLE subtitle)
+      (.setBody subtitle-field (FrameBodyTIT3. (.getTextEncoding subtitle-body) title)))
+    swap-title))
 
 (defn swap-album
   [tag]
   (let [album (.getFirst tag ID3v23FieldKey/ALBUM)
-        grouping (.getFirst tag ID3v23FieldKey/GROUPING)]
-    (if (= album "http://ocremix.org")
-      (do
-        (set-txt-field tag ID3v23FieldKey/ALBUM grouping)
-        (set-txt-field tag ID3v23FieldKey/GROUPING album)
-        true)
-      false)))
+        grouping (.getFirst tag ID3v23FieldKey/GROUPING)
+        ocremix-album (= album "http://ocremix.org")]
+    (when ocremix-album
+      (set-txt-field tag ID3v23FieldKey/ALBUM grouping)
+      (set-txt-field tag ID3v23FieldKey/GROUPING album))
+    ocremix-album))
 
 (defn set-album-sort
   [tag sort-album]
@@ -108,7 +106,7 @@
   [tag]
   (let [album (.getFirst tag ID3v23FieldKey/ALBUM)
         sort-album (.getFirst tag ID3v23FieldKey/ALBUM_SORT)]
-    (if (and (not (.hasField tag "TSOA")) (.startsWith album "Final Fantasy"))
+    (when (and (not (.hasField tag "TSOA")) (.startsWith album "Final Fantasy"))
       (case album
         "Final Fantasy II" (set-album-sort tag "Final Fantasy 02")
         "Final Fantasy III" (set-album-sort tag "Final Fantasy 03")
@@ -123,20 +121,18 @@
         "Final Fantasy XII" (set-album-sort tag "Final Fantasy 12")
         "Final Fantasy XIII" (set-album-sort tag "Final Fantasy 13")
         "Final Fantasy XIV" (set-album-sort tag "Final Fantasy 14")
-        false)
-      false)))
+        false))))
 
 (defn translate-composer
   "Respect"
   [tag]
-  (let [composer (.getFirst tag ID3v23FieldKey/COMPOSER)]
-    (if (.contains composer "Nobuo Uematsu")
-      (do
-        (set-txt-field tag
-                       ID3v23FieldKey/COMPOSER
-                       (clojure.string/replace composer #"Nobuo Uematsu" "植松伸夫"))
-        true)
-      false)))
+  (let [composer (.getFirst tag ID3v23FieldKey/COMPOSER)
+        translate (.contains composer "Nobuo Uematsu")]
+    (when translate
+      (set-txt-field
+       tag ID3v23FieldKey/COMPOSER
+       (clojure.string/replace composer #"Nobuo Uematsu" "植松伸夫")))
+    translate))
 
 (defn update-tags
   [update-dir file-path]
