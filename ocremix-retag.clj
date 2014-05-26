@@ -206,7 +206,7 @@
           (System/exit 0)))
     (validate-opts opts help-str)
     (doto (Logger/getLogger "org.jaudiotagger")
-      (.setLevel Level/OFF))
+      (.setLevel Level/WARNING))
     (when (:files opts)
       (dorun (map (partial process-file (:parse opts) update-dir) paths)))
     (when (:directory opts)
