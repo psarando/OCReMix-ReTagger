@@ -29,6 +29,7 @@ Also adds a Sort Album tag (TSOA) for Final Fantasy II - XIV Albums, and updates
 | -------- | ------- | ----
 | -h, --no-help, --help | false | Show help. |
 | -p, --no-parse, --parse | false | Parse Tags. |
+| -r, --retagdir | retagged | Destination directory for retagged files (by default, a subdirectory created along side the processed files). |
 | -f, --no-files, --files | false | Process Files. |
 | -d, --no-directory, --directory | false | Process Directories. |
 

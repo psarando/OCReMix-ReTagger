@@ -182,6 +182,7 @@
    args
    ["-h" "--help" "Show help." :default false :flag true]
    ["-p" "--parse" "Parse Tags." :default false :flag true]
+   ["-r" "--retagdir" "Destination directory for retagged files (by default, a subdirectory created along side the processed files)." :default "retagged"]
    ["-f" "--files" "Process Files." :default false :flag true]
    ["-d" "--directory" "Process Directories." :default false :flag true]))
 
@@ -200,7 +201,7 @@
   (let [args *command-line-args*
         [opts paths help-str] (parse-args args)
         paths (drop 1 paths)
-        update-dir "retagged"]
+        update-dir (:retagdir opts)]
     (when (:help opts)
       (do (println help-str)
           (System/exit 0)))
