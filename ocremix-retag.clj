@@ -91,7 +91,7 @@
   [tag]
   (let [album (.getFirst tag ID3v23FieldKey/ALBUM)
         grouping (.getFirst tag ID3v23FieldKey/GROUPING)
-        ocremix-album (= album "http://ocremix.org")]
+        ocremix-album (re-find #"https?://ocremix.org" album)]
     (when ocremix-album
       (set-txt-field tag ID3v23FieldKey/ALBUM grouping)
       (set-txt-field tag ID3v23FieldKey/GROUPING album))
